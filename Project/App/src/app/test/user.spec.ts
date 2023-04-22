@@ -1,14 +1,11 @@
 import { User } from './user';
 
-
-
 describe('Casos de prueba con asignar el email', function () {
   let component: User;
   beforeEach(() => {
     component = new User();
   });
 
-  
   // Caso de prueba 1: Asignar email valido
   // Objetivo: Verificar que el método setEmail asigne correctamente el valor del correo electrónico si el correo es válido.
   // Datos de prueba:
@@ -57,8 +54,8 @@ describe('Casos de prueba de la contraseña', function () {
     expect(() => {
       component.validatePassword('Car12');
     }).toThrowError('La contraseña necesita al menos 10 caracteres');
-    });
   });
+});
 
 describe('Casos de prueba que contenga letras en una cadena', function () {
   let component: User;
@@ -67,13 +64,13 @@ describe('Casos de prueba que contenga letras en una cadena', function () {
   });
 
   // Objetivo: verificar que el método tieneLetras() retorne true para un texto que contiene letras .
-  // Datos de prueba: 
-  //text 1 = '1234' 
+  // Datos de prueba:
+  //text 1 = '1234'
   //text 2 = 'aasd643531'
   //text 3 = '234234'
   //Resultado esperado:
   //res 1 = false
-  //res 2 = true 
+  //res 2 = true
   //res 3 = false
   it('Comprobar si hay letras', () => {
     [
@@ -84,11 +81,4 @@ describe('Casos de prueba que contenga letras en una cadena', function () {
       expect(component.tieneLetras(text)).toBe(res);
     });
   });
-
-  afterEach(() => {
-    component =
-  });
-
-
-
 });
