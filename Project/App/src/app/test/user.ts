@@ -74,13 +74,7 @@ export class User {
   getLastName(): string {
     return this.lastName;
   }
-  setEmail(email: string) {
-    if (this.checkEmail(email)) {
-      this.email = email;
-    } else {
-      throw new Error('El formato del correo es incorrecto');
-    }
-  }
+
   checkEmail(email: string) {
     return (
       typeof email === 'string' &&
@@ -135,6 +129,33 @@ export class User {
     return this.roles;
   }
 
+  setEmail(email: string) {
+    if (this.checkEmail(email)) {
+      this.email = email;
+    } else {
+      throw new Error('El formato del correo es incorrecto');
+    }
+  }
+
+  /*El password debe tener al menos 10 caracteres, formado por números, letras mayúsculas y minúsculas*/
+  validatePassword(pas1: any): boolean {
+    if (pas1.length < 10) {
+      throw new Error('La contraseña necesita al menos 10 caracteres');
+    } else if (!this.tieneNumeros(pas1)) {
+      throw new Error('La contraseña debe tener al menos un número');
+    } else if (!this.tieneLetras(pas1)) {
+      throw new Error('La contraseña debe tener al menos una letra minúscula');
+    } else if (!this.tieneLetraMayuscula(pas1)) {
+      throw new Error(
+        'La contraseña debe tener al menos una letra en mayúscula'
+      );
+    } else if (this.tieneCaracteresEspeciales(pas1)) {
+      throw new Error('La contraseña no puede contener caracteres especiales');
+    } else {
+      return true;
+    }
+  }
+
   /**
    * Retorna el detalle de una posición espefica.
    * @param posicion el número de posición.
@@ -146,6 +167,7 @@ export class User {
     }
     return this.roles[posicion - 1];
   }
+
   tieneNumeros(texto: string): boolean {
     var numeros = '0123456789';
     for (var i = 0; i < texto.length; i++) {
@@ -184,24 +206,5 @@ export class User {
       }
     }
     return false;
-  }
-
-  /*El password debe tener al menos 10 caracteres, formado por números, letras mayúsculas y minúsculas*/
-  validatePassword(pas1: any): boolean {
-    if (pas1.length < 10) {
-      throw new Error('La contraseña necesita al menos 10 caracteres');
-    } else if (!this.tieneNumeros(pas1)) {
-      throw new Error('La contraseña debe tener al menos un número');
-    } else if (!this.tieneLetras(pas1)) {
-      throw new Error('La contraseña debe tener al menos una letra minúscula');
-    } else if (!this.tieneLetraMayuscula(pas1)) {
-      throw new Error(
-        'La contraseña debe tener al menos una letra en mayúscula'
-      );
-    } else if (this.tieneCaracteresEspeciales(pas1)) {
-      throw new Error('La contraseña no puede contener caracteres especiales');
-    } else {
-      return true;
-    }
   }
 }
