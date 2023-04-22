@@ -42,3 +42,21 @@ describe('Casos de prueba de la contraseña', function () {
     }).toThrowError('La contraseña necesita al menos 10 caracteres');
   });
 });
+
+describe('Casos de tiene letras en una cadena', function () {
+  let component: User;
+  beforeEach(() => {
+    component = new User();
+  });
+
+  // Prueba 1: Verificar que la cadena tenga letras
+  it('Tiene letras la cadena ingresada', () => {
+    [
+      { text: '1234', res: false },
+      { text: 'aasd643531', res: true },
+      { text: '234234', res: false },
+    ].forEach(({ text, res }) => {
+      expect(component.tieneLetras(text)).toBe(res);
+    });
+  });
+});
